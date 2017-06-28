@@ -1,0 +1,13 @@
+Changelog
+=========
+
+
+v0.0.3 (2017-06-28)
+-------------------
+
+Fixes
+~~~~~
+- Use the LOGIN_REDIRECT_URL if the LOGOUT_REDIRECT_URL is not
+  specified. [Stavros Korokithakis]
+
+
