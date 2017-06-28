@@ -1,0 +1,2 @@
+recursive-include tokenauth *.py *.html
+include README.md LICENSE
