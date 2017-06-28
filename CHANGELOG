@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v0.0.4 (2017-06-28)
+-------------------
+
+Fixes
+~~~~~
+- Include template files. [Stavros Korokithakis]
+
+
 v0.0.3 (2017-06-28)
 -------------------
 
