@@ -53,6 +53,18 @@ urlpatterns += url(r'^auth/', include('tokenauth.urls', namespace="tokenauth"))
 Done! The user enters their email, click the link and they're in. No passwords
 or anything.
 
+You can email a user a login link by using the
+`tokenauth.helpers.email_login_link` convenience function;
+
+```python
+from tokenauth.helpers import email_login_link
+
+def myview(request):
+    ...
+    email_login_link(request, "some@email.address")
+    ...
+```
+
 
 License
 -------

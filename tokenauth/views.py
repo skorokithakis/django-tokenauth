@@ -1,19 +1,12 @@
-import base64
-import json
-import time
-
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as djlogin, logout as djlogout
 from django.contrib.auth.decorators import login_required
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
-from django.core.signing import Signer
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from . import settings as ta_settings
+from .helpers import email_login_link
 
 
 class EmailForm(forms.Form):
@@ -40,21 +33,7 @@ def token_post(request):
         # The user has submitted the email form.
         form = EmailForm(request.POST)
         if form.is_valid():
-            current_site = get_current_site(request)
-
-            # Create the signed structure containing the time and email address.
-            email = form.cleaned_data["email"].lower().strip()
-            data = {"t": int(time.time()), "e": email}
-            data = Signer().sign(base64.b64encode(json.dumps(data).encode("utf8")))
-
-            # Send the link by email.
-            send_mail(
-                render_to_string("tokenauth_login_subject.txt", {"current_site": current_site}, request=request).strip(),
-                render_to_string("tokenauth_login_body.txt", {"current_site": current_site, "data": data}, request=request),
-                ta_settings.DEFAULT_FROM_EMAIL,
-                [email],
-                fail_silently=False,
-            )
+            email_login_link(request, form.cleaned_data["email"])
 
             messages.success(request, _("Login email sent! Please check your"
                 " inbox and click on the link to be logged in."))
