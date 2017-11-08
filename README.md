@@ -66,6 +66,18 @@ def myview(request):
 ```
 
 
+Settings
+--------
+
+Here are the settings you can change in your `settings.py`:
+
+* `TOKENAUTH_TOKEN_DURATION` (default: 30 minutes): How long a token should be valid for, in seconds.
+* `TOKENAUTH_LOGIN_URL` (default: LOGIN_URL): Where to redirect after the email link has been clicked.
+* `TOKENAUTH_LOGIN_REDIRECT` (default: LOGIN_REDIRECT_URL): Where to redirect after login.
+* `TOKENAUTH_LOGOUT_REDIRECT` (default: LOGOUT_REDIRECT_URL): Where to redirect after logout.
+* `TOKENAUTH_DEFAULT_FROM_EMAIL` (default: DEFAULT_FROM_EMAIL): The email address the activation email should come from.
+
+
 License
 -------
 
