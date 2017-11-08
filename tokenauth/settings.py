@@ -1,7 +1,7 @@
 from django.conf import settings
 
 # How long a token should be valid for, in seconds.
-TOKEN_DURATION = getattr(settings, "TOKENAUTH_TOKEN_DURATION", 5 * 60)
+TOKEN_DURATION = getattr(settings, "TOKENAUTH_TOKEN_DURATION", 30 * 60)
 
 # Where to redirect after link operations.
 LOGIN_URL = getattr(settings, "TOKENAUTH_LOGIN_URL", settings.LOGIN_URL)
