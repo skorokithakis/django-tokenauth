@@ -16,7 +16,7 @@ class EmailForm(forms.Form):
 
 
 def token_post(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         messages.error(request, _("You are already logged in."))
         return redirect(ta_settings.LOGIN_REDIRECT)
 
