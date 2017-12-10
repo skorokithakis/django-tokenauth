@@ -16,7 +16,8 @@ def email_login_link(request, email):
     # Create the signed structure containing the time and email address.
     email = email.lower().strip()
     data = {"t": int(time.time()), "e": email}
-    data = Signer().sign(base64.b64encode(json.dumps(data).encode("utf8")))
+    data = json.dumps(data).encode("utf8")
+    data = Signer().sign(base64.b64encode(data).decode("utf8"))
 
     # Send the link by email.
     send_mail(
