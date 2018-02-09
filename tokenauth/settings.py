@@ -1,5 +1,7 @@
 from django.conf import settings
 
+NORMALIZE_EMAIL = getattr(settings, "TOKENAUTH_NORMALIZE_EMAIL", lambda e: e)
+
 # How long a token should be valid for, in seconds.
 TOKEN_DURATION = getattr(settings, "TOKENAUTH_TOKEN_DURATION", 30 * 60)
 

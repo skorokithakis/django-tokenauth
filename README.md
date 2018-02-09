@@ -71,6 +71,11 @@ Settings
 
 Here are the settings you can change in your `settings.py`:
 
+* `TOKENAUTH_NORMALIZE_EMAIL` (default: `lambda e: e`): A function that will accept a single argument, the email address
+  the user specifies in the form, and will normalize it.  You may want to use this for lowercasing email addresses, or
+  for removing spaces from the beginning and end. You can also use this for disallowing authentication, as an email
+  address will not be allowed to authenticate if this function returns something falsy (False, or None, or the empty
+  string).
 * `TOKENAUTH_TOKEN_DURATION` (default: 30 minutes): How long a token should be valid for, in seconds.
 * `TOKENAUTH_LOGIN_URL` (default: LOGIN_URL): Where to redirect after the email link has been clicked.
 * `TOKENAUTH_LOGIN_REDIRECT` (default: LOGIN_REDIRECT_URL): Where to redirect after login.

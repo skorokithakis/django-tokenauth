@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as djlogin, logout as djlogout
+from django.contrib.auth import login as djlogin
+from django.contrib.auth import logout as djlogout
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
@@ -23,25 +25,35 @@ def token_post(request):
     if request.GET.get("d"):
         # The user has clicked a login link.
         user = authenticate(token=request.GET["d"])
-        if user is not None:
-            djlogin(request, user)
-            messages.success(request, _("Login successful."))
-            return redirect(ta_settings.LOGIN_REDIRECT)
-        else:
+        if user is None:
             messages.error(request, _("The login link was invalid or has expired. Please try to log in again."))
+            return redirect(ta_settings.LOGIN_URL)
+
+        djlogin(request, user)
+        messages.success(request, _("Login successful."))
+        return redirect(ta_settings.LOGIN_REDIRECT)
     elif request.method == "POST":
         # The user has submitted the email form.
         form = EmailForm(request.POST)
-        if form.is_valid():
-            email_login_link(request, form.cleaned_data["email"])
+        if not form.is_valid():
+            messages.error(request, _("The email address was invalid. Please check the address and try again."))
+            return redirect(ta_settings.LOGIN_URL)
 
-            messages.success(request, _("Login email sent! Please check your"
-                " inbox and click on the link to be logged in."))
-        else:
-            messages.error(request, _("The email address was invalid. Please"
-                " check the address and try again."))
+        email = ta_settings.NORMALIZE_EMAIL(form.cleaned_data["email"])
+        if not email:
+            # The user's normalization function has returned something falsy.
+            messages.error(
+                request, _("That email address is not allowed to authenticate. Please use an alternate address.")
+            )
+            return redirect(ta_settings.LOGIN_URL)
+
+        email_login_link(request, email)
+
+        messages.success(
+            request, _("Login email sent! Please check your inbox and click on the link to be logged in.")
+        )
     else:
-        messages.error(request, _("The login link was invalid or has expired. Please try to log in again."))
+        messages.error(request, _("The login link was invalid. Please try to log in again."))
 
     return redirect(ta_settings.LOGIN_URL)
 
