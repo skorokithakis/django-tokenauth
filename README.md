@@ -65,6 +65,8 @@ def myview(request):
     ...
 ```
 
+To log someone out, just redirect them to `tokenauth:logout`.
+
 
 Settings
 --------
