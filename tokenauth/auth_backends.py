@@ -1,17 +1,12 @@
-import base64
-import json
-import time
-
 from django.contrib.auth import get_user_model
-from django.core.signing import Signer
 
-from . import settings as ta_settings
+from .models import AuthToken
 
 
 class EmailTokenBackend:
     def get_user(self, user_id):
-        """Get a user by their email address."""
-        User = get_user_model()  # noqa
+        """Get a user by their primary key."""
+        User = get_user_model()
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
@@ -19,16 +14,15 @@ class EmailTokenBackend:
 
     def authenticate(self, token=None):
         """Authenticate a user given a signed token."""
-        try:
-            data = Signer().unsign(token)
-        except:
-            return
+        AuthToken.delete_stale()
 
-        data = json.loads(base64.b64decode(data).decode("utf8"))
-        if data["t"] < time.time() - ta_settings.TOKEN_DURATION:
+        t = AuthToken.objects.filter(token=token).first()
+        if not t:
             return
+        else:
+            t.delete()
 
         User = get_user_model()
 
-        user, created = User.objects.get_or_create(email=data["e"])
+        user, created = User.objects.get_or_create(email=t.email)
         return user

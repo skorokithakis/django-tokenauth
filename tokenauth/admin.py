@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import AuthToken
+
+
+@admin.register(AuthToken)
+class AuthTokenAdmin(admin.ModelAdmin):
+    list_display = ["email", "timestamp"]
+    ordering = ["-timestamp"]
