@@ -38,7 +38,7 @@ def email_post(request):
         )
         return redirect(ta_settings.LOGIN_URL)
 
-    email_login_link(request, email)
+    email_login_link(request, email, next_url=request.GET.get("next", ""))
 
     messages.success(request, _("Login email sent! Please check your inbox and click on the link to be logged in."))
     return redirect(ta_settings.LOGIN_URL)
@@ -56,9 +56,18 @@ def token_post(request, token):
         messages.error(request, _("The login link was invalid or has expired. Please try to log in again."))
         return redirect(ta_settings.LOGIN_URL)
 
+    if hasattr(user, "_tokenauth_next_url"):
+        # Get the next URL from the user object, if it was set by our custom `authenticate`.
+        next_url = user._tokenauth_next_url
+
+        # Remove the next URL from the user object.
+        del user._tokenauth_next_url
+    else:
+        next_url = ta_settings.LOGIN_REDIRECT
+
     djlogin(request, user)
     messages.success(request, _("Login successful."))
-    return redirect(ta_settings.LOGIN_REDIRECT)
+    return redirect(next_url)
 
 
 @login_required

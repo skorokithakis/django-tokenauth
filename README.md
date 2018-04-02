@@ -44,7 +44,7 @@ urlpatterns += url(r'^auth/', include('tokenauth.urls', namespace="tokenauth"))
 * Add a form to the page where you want to authenticate a user:
 
 ```html
-<form action="{% url "tokenauth:login" %}" method="post">{% csrf_token %}
+<form action="{% url "tokenauth:login" %}?next={{ request.GET.next }}" method="post">{% csrf_token %}
     <input name="email" type="email" />
     <button type="submit">Submit</button>
 </form>
@@ -54,16 +54,21 @@ Done! The user enters their email, click the link and they're in. No passwords
 or anything.
 
 You can email a user a login link by using the
-`tokenauth.helpers.email_login_link` convenience function;
+`tokenauth.helpers.email_login_link` convenience function:
 
 ```python
 from tokenauth.helpers import email_login_link
 
 def myview(request):
     ...
-    email_login_link(request, "some@email.address")
+    email_login_link(request, "some@email.address", next_url="/some/page/")
     ...
 ```
+
+`email_login_link` accepts an optional `next_url` parameter, which, if set,
+will tell `tokenauth` to redirect that user to that URL after a successful
+login. If this is not specified, the user will be redirected to the URL that
+is specified in the `TOKENAUTH_LOGIN_REDIRECT` setting.
 
 To log someone out, just redirect them to `tokenauth:logout`.
 

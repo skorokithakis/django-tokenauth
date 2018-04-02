@@ -15,6 +15,7 @@ class AuthToken(models.Model):
     token = models.CharField(max_length=200, default=generate_token, primary_key=True)
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
     email = models.CharField(max_length=2000)
+    next_url = models.CharField(max_length=2000, blank=True)
 
     @classmethod
     def delete_stale(cls):
