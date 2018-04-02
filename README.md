@@ -92,6 +92,21 @@ Here are the settings you can change in your `settings.py`:
 * `TOKENAUTH_DEFAULT_FROM_EMAIL` (default: DEFAULT_FROM_EMAIL): The email address the activation email should come from.
 
 
+FAQ
+---
+
+### But but... isn't this insecure? What if the user's email gets compromised?
+
+Do you have a "forgot your password?" link? That does exactly the same thing, so this library is more secure than that,
+since it ensures nobody can steal a user's password (since there is none).
+
+### Is this library amazing?
+
+Yes, yes it is. It even redirects the user to the page they were trying to go before the login page. Not only that, but
+the signin link is really short, so they can even log in securely on an untrusted computer by receiving the email on
+their phone and typing it on the untrusted computer.
+
+
 License
 -------
 
