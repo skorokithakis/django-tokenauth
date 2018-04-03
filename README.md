@@ -7,8 +7,9 @@ About
 Django-tokenauth is a simple, passwordless authentication method based on
 a one-time token sent over email. There is no user registration per se, only
 login. The user enters their email on the login page, and a one-time link that
-is only valid for a few minutes  is generated and sent in an email. The user
-clicks on the link and is immediately logged in.
+is only valid for a few minutes (and one login) is generated and sent in an
+email. The user clicks on the link and is immediately logged in, and the token
+is invalidated.
 
 [![PyPI version](https://img.shields.io/pypi/v/django-tokenauth.svg)](https://pypi.python.org/pypi/django-tokenauth)
 
