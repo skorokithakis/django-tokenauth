@@ -70,7 +70,8 @@ will tell `tokenauth` to redirect that user to that URL after a successful
 login. If this is not specified, the user will be redirected to the URL that
 is specified in the `TOKENAUTH_LOGIN_REDIRECT` setting.
 
-To log someone out, just redirect them to `tokenauth:logout`.
+To log someone out, just redirect them to `tokenauth:logout` (or use Django's
+built-in function, or roll your own. It's just standard logout).
 
 
 Settings
