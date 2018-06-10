@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from .models import AuthToken
+from .models import AuthToken, generate_token
 
 
 class EmailTokenBackend:
@@ -24,7 +24,12 @@ class EmailTokenBackend:
 
         User = get_user_model()
 
-        user, created = User.objects.get_or_create(email=t.email)
+        if hasattr(User, "username"):
+            # The model contains a username, so we should try to fill it in.
+            user, created = User.objects.get_or_create(email=t.email, username=generate_token()[:8])
+        else:
+            user, created = User.objects.get_or_create(email=t.email)
+
         if t.next_url:
             # This is a bit of a hack so we can return the URL to redirect to.
             user._tokenauth_next_url = t.next_url
