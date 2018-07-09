@@ -24,7 +24,7 @@ class EmailTokenBackend:
 
         User = get_user_model()
 
-        if hasattr(User, "username"):
+        if "username" in [field.name for field in User._meta.get_fields(include_hidden=True)]:
             # The model contains a username, so we should try to fill it in.
             user, created = User.objects.get_or_create(email=t.email, defaults={"username": "u" + generate_token()[:8]})
         else:
