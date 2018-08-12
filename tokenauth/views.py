@@ -51,7 +51,7 @@ def token_post(request, token):
         messages.error(request, _("You are already logged in."))
         return redirect(ta_settings.LOGIN_REDIRECT)
 
-    user = authenticate(token=token)
+    user = authenticate(request, token=token)
     if user is None:
         messages.error(request, _("The login link was invalid or has expired. Please try to log in again."))
         return redirect(ta_settings.LOGIN_URL)

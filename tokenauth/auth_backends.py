@@ -12,7 +12,7 @@ class EmailTokenBackend:
         except User.DoesNotExist:
             return None
 
-    def authenticate(self, token=None):
+    def authenticate(self, request, token=None):
         """Authenticate a user given a signed token."""
         AuthToken.delete_stale()
 
