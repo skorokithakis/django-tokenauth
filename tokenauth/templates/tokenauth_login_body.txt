@@ -1,6 +1,6 @@
 Hello!
 
-This email contains your secret {{ current_site.name }} login link. To log in,
+This email contains your secret {{ current_site.name|safe }} login link. To log in,
 just click the link below, and please don't share it with anyone, or they will
 be able to access your account.
 
@@ -9,4 +9,4 @@ Click to log in:
 https://{{ current_site.domain }}{% url "tokenauth:login-token" token.token %}
 
 Thanks!
-The {{ current_site.name }} team
+The {{ current_site.name|safe }} team
