@@ -46,7 +46,7 @@ urlpatterns += url(r'^auth/', include('tokenauth.urls', namespace="tokenauth"))
 
 ```html
 <form action="{% url "tokenauth:login" %}?next={{ request.GET.next }}" method="post">{% csrf_token %}
-    <input name="email" type="email" />
+    <input name="email" type="email" autofocus />
     <button type="submit">Submit</button>
 </form>
 ```
