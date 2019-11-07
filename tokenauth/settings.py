@@ -1,5 +1,8 @@
 from django.conf import settings
 
+# The rate at which people will be able to request logins.
+RATELIMIT_RATE = getattr(settings, "TOKENAUTH_RATELIMIT_RATE", "3/h")
+
 NORMALIZE_EMAIL = getattr(settings, "TOKENAUTH_NORMALIZE_EMAIL", lambda e: e)
 
 # How long a token should be valid for, in seconds.

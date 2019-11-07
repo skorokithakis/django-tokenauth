@@ -75,6 +75,24 @@ To log someone out, just redirect them to `tokenauth:logout` (or use Django's
 built-in function, or roll your own. It's just standard logout).
 
 
+Rate-limiting
+-------------
+
+django-tokenauth supports ratelimiting for the email-sending view (so you don't
+spam people). To enable it, just install `django-ratelimit` or `django-brake`.
+The library will automatically start rate-limiting requests (see "settings"
+below for the rate).
+
+**Warning:** Since these libraries use IPs for rate-limiting, you need to make
+sure your application gets the correct user IP. Specifically, if you use a
+reverse proxy, the application might be getting the proxy's IP instead, and
+blocking everyone. Ensure your application can see the real user's IP before
+enabling rate-limiting.
+
+Also, make sure your cache works properly, since `ratelimit` and `brake` use it
+to remember requests.
+
+
 Settings
 --------
 
@@ -92,6 +110,7 @@ Here are the settings you can change in your `settings.py`:
 * `TOKENAUTH_LOGIN_REDIRECT` (default: LOGIN_REDIRECT_URL): Where to redirect after login.
 * `TOKENAUTH_LOGOUT_REDIRECT` (default: LOGOUT_REDIRECT_URL): Where to redirect after logout.
 * `TOKENAUTH_DEFAULT_FROM_EMAIL` (default: DEFAULT_FROM_EMAIL): The email address the activation email should come from.
+* `TOKENAUTH_RATELIMIT_RATE` (default: "3/h"): How many requests per IP to allow for email sending.
 
 
 FAQ

@@ -11,6 +11,20 @@ from django.views.decorators.http import require_http_methods
 from . import settings as ta_settings
 from .helpers import email_login_link
 
+try:
+    # Try importing django-ratelimit.
+    from ratelimit.decorators import ratelimit as rl
+    ratelimit = rl(key="ip", rate=ta_settings.RATELIMIT_RATE)
+except ImportError:
+    try:
+        # Try importing django-brake.
+        from brake.decorators import ratelimit as rl
+        ratelimit = rl(rate=ta_settings.RATELIMIT_RATE)
+    except ImportError:
+        # Neither exists, so no rate-limiting.
+        def ratelimit(func):
+            return func
+
 
 class EmailForm(forms.Form):
     """The email form for the login page."""
@@ -19,8 +33,13 @@ class EmailForm(forms.Form):
 
 
 @require_http_methods(["POST"])
+@ratelimit
 def email_post(request):
     """Process the submission of the form with the user's email and mail them a link."""
+    if getattr(request, 'limited', False):
+        messages.warning(request, _("You're trying to log in too often. Please try again later."))
+        return redirect(ta_settings.LOGIN_URL)
+
     if request.user.is_authenticated:
         messages.error(request, _("You are already logged in."))
         return redirect(ta_settings.LOGIN_REDIRECT)
