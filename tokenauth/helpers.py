@@ -15,8 +15,16 @@ def email_login_link(request, email, next_url=""):
 
     # Send the link by email.
     send_mail(
-        render_to_string("tokenauth_login_subject.txt", {"current_site": current_site}, request=request).strip(),
-        render_to_string("tokenauth_login_body.txt", {"current_site": current_site, "token": token}, request=request),
+        render_to_string(
+            "tokenauth_login_subject.txt",
+            {"current_site": current_site},
+            request=request,
+        ).strip(),
+        render_to_string(
+            "tokenauth_login_body.txt",
+            {"current_site": current_site, "token": token},
+            request=request,
+        ),
         ta_settings.DEFAULT_FROM_EMAIL,
         [email],
         fail_silently=False,

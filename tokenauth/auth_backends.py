@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 
-from .models import AuthToken, generate_token
+from .models import AuthToken
+from .models import generate_token
 
 
 class EmailTokenBackend:
@@ -24,9 +25,13 @@ class EmailTokenBackend:
 
         User = get_user_model()
 
-        if "username" in [field.name for field in User._meta.get_fields(include_hidden=True)]:
+        if "username" in [
+            field.name for field in User._meta.get_fields(include_hidden=True)
+        ]:
             # The model contains a username, so we should try to fill it in.
-            user, created = User.objects.get_or_create(email=t.email, defaults={"username": "u" + generate_token()[:8]})
+            user, created = User.objects.get_or_create(
+                email=t.email, defaults={"username": "u" + generate_token()[:8]}
+            )
         else:
             user, created = User.objects.get_or_create(email=t.email)
 

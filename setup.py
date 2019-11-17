@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-
 import sys
+
 from tokenauth import __version__
-assert sys.version >= '2.7', "Requires Python v2.7 or above."
-from distutils.core import setup
-from setuptools import find_packages
+
+assert sys.version >= "2.7", "Requires Python v2.7 or above."
+from distutils.core import setup  # noqa
+from setuptools import find_packages  # noqa
 
 setup(
     name="django-tokenauth",
@@ -14,7 +15,7 @@ setup(
     url="https://github.com/skorokithakis/django-tokenauth",
     description="""An authentication backend that uses tokens sent over email to authenticate users.""",
     long_description="A small Django authentication backend that sends users a one-time login link"
-                     " through email. When the user clicks the link, they are immediately logged in.",
+    " through email. When the user clicks the link, they are immediately logged in.",
     license="BSD",
     keywords="django",
     zip_safe=False,

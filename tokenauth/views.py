@@ -14,11 +14,13 @@ from .helpers import email_login_link
 try:
     # Try importing django-ratelimit.
     from ratelimit.decorators import ratelimit as rl
+
     ratelimit = rl(key="ip", rate=ta_settings.RATELIMIT_RATE)
 except ImportError:
     try:
         # Try importing django-brake.
         from brake.decorators import ratelimit as rl
+
         ratelimit = rl(rate=ta_settings.RATELIMIT_RATE)
     except ImportError:
         # Neither exists, so no rate-limiting.
@@ -36,8 +38,10 @@ class EmailForm(forms.Form):
 @ratelimit
 def email_post(request):
     """Process the submission of the form with the user's email and mail them a link."""
-    if getattr(request, 'limited', False):
-        messages.warning(request, _("You're trying to log in too often. Please try again later."))
+    if getattr(request, "limited", False):
+        messages.warning(
+            request, _("You're trying to log in too often. Please try again later.")
+        )
         return redirect(ta_settings.LOGIN_URL)
 
     if request.user.is_authenticated:
@@ -46,20 +50,31 @@ def email_post(request):
 
     form = EmailForm(request.POST)
     if not form.is_valid():
-        messages.error(request, _("The email address was invalid. Please check the address and try again."))
+        messages.error(
+            request,
+            _("The email address was invalid. Please check the address and try again."),
+        )
         return redirect(ta_settings.LOGIN_URL)
 
     email = ta_settings.NORMALIZE_EMAIL(form.cleaned_data["email"])
     if not email:
         # The user's normalization function has returned something falsy.
         messages.error(
-            request, _("That email address is not allowed to authenticate. Please use an alternate address.")
+            request,
+            _(
+                "That email address is not allowed to authenticate. Please use an alternate address."
+            ),
         )
         return redirect(ta_settings.LOGIN_URL)
 
     email_login_link(request, email, next_url=request.GET.get("next", ""))
 
-    messages.success(request, _("Login email sent! Please check your inbox and click on the link to be logged in."))
+    messages.success(
+        request,
+        _(
+            "Login email sent! Please check your inbox and click on the link to be logged in."
+        ),
+    )
     return redirect(ta_settings.LOGIN_URL)
 
 
@@ -72,7 +87,10 @@ def token_post(request, token):
 
     user = authenticate(request, token=token)
     if user is None:
-        messages.error(request, _("The login link was invalid or has expired. Please try to log in again."))
+        messages.error(
+            request,
+            _("The login link was invalid or has expired. Please try to log in again."),
+        )
         return redirect(ta_settings.LOGIN_URL)
 
     if hasattr(user, "_tokenauth_next_url"):
