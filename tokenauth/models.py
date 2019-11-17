@@ -20,6 +20,11 @@ class AuthToken(models.Model):
     token = models.CharField(max_length=200, default=generate_token, primary_key=True)
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
     email = models.CharField(max_length=2000)
+    new_email = models.CharField(
+        max_length=2000,
+        help_text="The email address that the user's email will be set to when they use this token.",
+        blank=True,
+    )
     next_url = models.CharField(max_length=2000, blank=True)
 
     @classmethod

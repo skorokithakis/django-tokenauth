@@ -1,0 +1,11 @@
+Hello!
+
+This email contains your {{ current_site.name|safe }} email change link. To
+verify your email address change, please click the link below.
+
+Click to verify the email address change:
+
+https://{{ current_site.domain }}{% url "tokenauth:login-token" token.token %}
+
+Thanks!
+The {{ current_site.name|safe }} team

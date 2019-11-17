@@ -81,10 +81,6 @@ def email_post(request):
 @require_http_methods(["GET"])
 def token_post(request, token):
     """Validate the token the user submitted."""
-    if request.user.is_authenticated:
-        messages.error(request, _("You are already logged in."))
-        return redirect(ta_settings.LOGIN_REDIRECT)
-
     user = authenticate(request, token=token)
     if user is None:
         messages.error(
@@ -92,6 +88,18 @@ def token_post(request, token):
             _("The login link was invalid or has expired. Please try to log in again."),
         )
         return redirect(ta_settings.LOGIN_URL)
+
+    if hasattr(user, "_tokenauth_new_email"):
+        user.email = user._tokenauth_new_email
+        user.save()
+
+        messages.success(request, _("Your email address has been changed."))
+        del user._tokenauth_new_email
+        return redirect(ta_settings.LOGIN_REDIRECT)
+
+    if request.user.is_authenticated:
+        messages.error(request, _("You are already logged in."))
+        return redirect(ta_settings.LOGIN_REDIRECT)
 
     if hasattr(user, "_tokenauth_next_url"):
         # Get the next URL from the user object, if it was set by our custom `authenticate`.

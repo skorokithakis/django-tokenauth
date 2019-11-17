@@ -38,4 +38,8 @@ class EmailTokenBackend:
         if t.next_url:
             # This is a bit of a hack so we can return the URL to redirect to.
             user._tokenauth_next_url = t.next_url
+
+        if t.new_email:
+            # The user is trying to change their email address.
+            user._tokenauth_new_email = t.new_email
         return user
