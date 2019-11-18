@@ -23,15 +23,15 @@ Installing django-tokenauth
 
 ```python
 # settings.py
-INSTALLED_APPS = [... 'tokenauth', ...]
+INSTALLED_APPS = [... "tokenauth", ...]
 ```
 
 * Add tokenauth to your authentication backends:
 
 ```python
 AUTHENTICATION_BACKENDS = (
-    'tokenauth.auth_backends.EmailTokenBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    "tokenauth.auth_backends.EmailTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
 )
 ```
 
@@ -39,7 +39,7 @@ AUTHENTICATION_BACKENDS = (
 
 ```python
 # urls.py
-urlpatterns += url(r'^auth/', include('tokenauth.urls', namespace="tokenauth"))
+urlpatterns += path("auth/", include("tokenauth.urls", namespace="tokenauth"))
 ```
 
 * Add a form to the page where you want to authenticate a user:
