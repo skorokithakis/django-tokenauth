@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 
+from . import settings as ta_settings
 from .models import AuthToken
 from .models import generate_token
 
@@ -20,7 +21,8 @@ class EmailTokenBackend:
         t = AuthToken.objects.filter(token=token).first()
         if not t:
             return
-        else:
+
+        if ta_settings.SINGLE_USE_LINK:
             t.delete()
 
         User = get_user_model()

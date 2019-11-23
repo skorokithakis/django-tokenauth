@@ -6,7 +6,7 @@ RATELIMIT_RATE = getattr(settings, "TOKENAUTH_RATELIMIT_RATE", "3/h")
 NORMALIZE_EMAIL = getattr(settings, "TOKENAUTH_NORMALIZE_EMAIL", lambda e: e)
 
 # How long a token should be valid for, in seconds.
-TOKEN_DURATION = getattr(settings, "TOKENAUTH_TOKEN_DURATION", 30 * 60)
+TOKEN_DURATION = getattr(settings, "TOKENAUTH_TOKEN_DURATION", 15 * 60)
 
 # How long the token should be, in characters.
 TOKEN_LENGTH = getattr(settings, "TOKENAUTH_TOKEN_LENGTH", 8)
@@ -27,3 +27,5 @@ LOGOUT_REDIRECT = getattr(
 DEFAULT_FROM_EMAIL = getattr(
     settings, "TOKENAUTH_DEFAULT_FROM_EMAIL", settings.DEFAULT_FROM_EMAIL
 )
+
+SINGLE_USE_LINK = getattr(settings, "TOKENAUTH_SINGLE_USE_LINK", False)
