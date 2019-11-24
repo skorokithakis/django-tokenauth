@@ -110,7 +110,7 @@ Here are the settings you can change in your `settings.py`:
   address will not be allowed to authenticate if this function returns something falsy (False, or None, or the empty
   string).
 * `TOKENAUTH_SINGLE_USE_LINK` (default: False): Whether a link will be disabled after a single login.
-* `TOKENAUTH_TOKEN_DURATION` (default: 15 minutes): How long a token should be valid for, in seconds. The link expires
+* `TOKENAUTH_TOKEN_DURATION` (default: 30 minutes): How long a token should be valid for, in seconds. The link expires
   after this has passed, regardless of the `TOKENAUTH_SINGLE_USE_LINK` setting.
 * `TOKENAUTH_TOKEN_LENGTH` (default: 8): How many characters long the token should be. The longer the validity, the
   longer the length, to maintain security. The longer the length, the worse the UX if a user has to type it in manually.
