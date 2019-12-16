@@ -10,8 +10,8 @@ def email_login_link(request, email, next_url="", new_email=""):
     current_site = get_current_site(request)
 
     # Create the token.
-    email = email.lower().strip()
-    new_email = new_email.lower().strip()
+    email = ta_settings.NORMALIZE_EMAIL(email)
+    new_email = ta_settings.NORMALIZE_EMAIL(new_email)
     token = AuthToken.objects.create(
         email=email, next_url=next_url, new_email=new_email
     )
@@ -29,7 +29,7 @@ def email_login_link(request, email, next_url="", new_email=""):
             else "tokenauth_login_subject.txt",
             {"current_site": current_site},
             request=request,
-        ).strip(),
+        ),
         render_to_string(
             "tokenauth_change_body.txt" if new_email else "tokenauth_login_body.txt",
             {"current_site": current_site, "token": token},
