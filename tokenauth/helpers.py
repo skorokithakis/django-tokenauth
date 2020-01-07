@@ -29,7 +29,7 @@ def email_login_link(request, email, next_url="", new_email=""):
             else "tokenauth_login_subject.txt",
             {"current_site": current_site},
             request=request,
-        ),
+        ).strip(),
         render_to_string(
             "tokenauth_change_body.txt" if new_email else "tokenauth_login_body.txt",
             {"current_site": current_site, "token": token},

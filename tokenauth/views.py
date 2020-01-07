@@ -85,7 +85,10 @@ def token_post(request, token):
     if user is None:
         messages.error(
             request,
-            _("The login link was invalid or has expired. Please try to log in again."),
+            _(
+                "The login link is invalid or has expired, or you are not allowed to "
+                "log in. Please try again."
+            ),
         )
         return redirect(ta_settings.LOGIN_URL)
 

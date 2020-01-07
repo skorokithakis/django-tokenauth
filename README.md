@@ -109,6 +109,8 @@ Here are the settings you can change in your `settings.py`:
   for removing spaces from the beginning and end. You can also use this for disallowing authentication, as an email
   address will not be allowed to authenticate if this function returns something falsy (False, or None, or the empty
   string).
+* `TOKENAUTH_CAN_LOG_IN` (default: `lambda request, user: True`): A function that will accept the request object and an
+  instance of the user currently trying to log in. If it returns False, the login will not be allowed.
 * `TOKENAUTH_SINGLE_USE_LINK` (default: False): Whether a link will be disabled after a single login.
 * `TOKENAUTH_TOKEN_DURATION` (default: 30 minutes): How long a token should be valid for, in seconds. The link expires
   after this has passed, regardless of the `TOKENAUTH_SINGLE_USE_LINK` setting.

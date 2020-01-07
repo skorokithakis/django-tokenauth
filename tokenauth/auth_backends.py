@@ -37,6 +37,9 @@ class EmailTokenBackend:
         else:
             user, created = User.objects.get_or_create(email=t.email)
 
+        if not ta_settings.CAN_LOG_IN(request, user):
+            return
+
         if t.next_url:
             # This is a bit of a hack so we can return the URL to redirect to.
             user._tokenauth_next_url = t.next_url
