@@ -5,16 +5,11 @@ cache: pip
 install: travis_retry pip install "virtualenv" tox codecov
 script: tox -e $TOX_ENV
 env:
-  - TOX_ENV=django111-py36
-  - TOX_ENV=django111-py35
-  - TOX_ENV=django111-py34
-  - TOX_ENV=django111-py27
-  - TOX_ENV=django110-py35
-  - TOX_ENV=django110-py34
-  - TOX_ENV=django110-py27
-  - TOX_ENV=django19-py35
-  - TOX_ENV=django19-py34
-  - TOX_ENV=django19-py27
-  - TOX_ENV=django18-py35
-  - TOX_ENV=django18-py34
-  - TOX_ENV=django18-py27
+  - TOX_ENV=django20-py38
+  - TOX_ENV=django20-py37
+  - TOX_ENV=django20-py36
+  - TOX_ENV=django20-py35
+  - TOX_ENV=django30-py38
+  - TOX_ENV=django30-py37
+  - TOX_ENV=django30-py36
+  - TOX_ENV=django30-py35
