@@ -71,11 +71,22 @@ will tell `tokenauth` to redirect that user to that URL after a successful
 login. If this is not specified, the user will be redirected to the URL that
 is specified in the `TOKENAUTH_LOGIN_REDIRECT` setting.
 
+
+Changing email addresses
+------------------------
+
 There is an additional piece of functionality that allows a user to change
 their email address. To do that, pass `new_email` to `email_login_link` with
 the user's new, desired email address. An email with a token will be sent to
 the new address, and when the user clicks that link, their email address will
-be changed. You don't need to do anything else.
+be changed.
+
+Just make sure the new email address isn't already associated with another
+user.
+
+
+Logging users out
+-----------------
 
 To log someone out, just redirect them to `tokenauth:logout` (or use Django's
 built-in function, or roll your own. It's just standard logout).

@@ -12,6 +12,7 @@ Features
 
 Fixes
 ~~~~~
+- Add wording about the link being temporary. [Stavros Korokithakis]
 - Normalize email addresses in the email change form. [Stavros
   Korokithakis]
 
