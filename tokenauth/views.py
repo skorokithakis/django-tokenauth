@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -10,6 +12,7 @@ from django.views.decorators.http import require_http_methods
 
 from . import settings as ta_settings
 from .helpers import email_login_link
+from .models import EmailLog
 
 try:
     # Try importing django-ratelimit.
@@ -64,6 +67,22 @@ def email_post(request):
             _(
                 "That email address is not allowed to authenticate. Please use an alternate address."
             ),
+        )
+        return redirect(ta_settings.LOGIN_URL)
+
+    EmailLog.delete_stale()
+    previous_emails = EmailLog.objects.filter(email=email)
+    if previous_emails:
+        # The user already requested an email a short time ago.
+        messages.error(
+            request,
+            _(
+                "You have already requested an email. Please wait %(delay)s more seconds before requesting another."
+            )
+            % {
+                "delay": ta_settings.RESENDING_DELAY
+                - (datetime.now() - previous_emails[0].timestamp).seconds
+            },
         )
         return redirect(ta_settings.LOGIN_URL)
 

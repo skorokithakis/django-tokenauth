@@ -3,6 +3,9 @@ from django.conf import settings
 # The rate at which people will be able to request logins.
 RATELIMIT_RATE = getattr(settings, "TOKENAUTH_RATELIMIT_RATE", "3/h")
 
+# The delay before you can request a second email, in seconds.
+RESENDING_DELAY = getattr(settings, "TOKENAUTH_RESENDING_DELAY", 60)
+
 # A function that gets passed a user's email address and returns a normalized/cleaned
 # up version.
 NORMALIZE_EMAIL = getattr(settings, "TOKENAUTH_NORMALIZE_EMAIL", lambda e: e)

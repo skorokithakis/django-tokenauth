@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 
 from . import settings as ta_settings
 from .models import AuthToken
+from .models import EmailLog
 
 
 def email_login_link(request, email, next_url="", new_email=""):
@@ -20,6 +21,8 @@ def email_login_link(request, email, next_url="", new_email=""):
     # change the email), otherwise send to the old one (we're trying to
     # log in).
     send_to_email = new_email if new_email else email
+
+    EmailLog.objects.create(email=email)
 
     # Send the link by email.
     send_mail(

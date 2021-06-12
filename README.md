@@ -71,6 +71,9 @@ will tell `tokenauth` to redirect that user to that URL after a successful
 login. If this is not specified, the user will be redirected to the URL that
 is specified in the `TOKENAUTH_LOGIN_REDIRECT` setting.
 
+Keep in mind that rate-limiting or a resending delay is not implemented for
+this method, you will have to implement it yourself.
+
 
 Changing email addresses
 ------------------------
@@ -132,6 +135,7 @@ Here are the settings you can change in your `settings.py`:
 * `TOKENAUTH_LOGOUT_REDIRECT` (default: LOGOUT_REDIRECT_URL): Where to redirect after logout.
 * `TOKENAUTH_DEFAULT_FROM_EMAIL` (default: DEFAULT_FROM_EMAIL): The email address the activation email should come from.
 * `TOKENAUTH_RATELIMIT_RATE` (default: "3/h"): How many requests per IP to allow for email sending.
+* `TOKENAUTH_RESENDING_DELAY` (default: 60): How many seconds the user has to wait before requesting a second email.
 
 
 FAQ
