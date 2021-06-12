@@ -7,6 +7,7 @@ Changelog
 
 Features
 ~~~~~~~~
+- Add delay between two subsequent emails. [Stavros Korokithakis]
 - Add CAN_LOG_IN setting to disallow logins to specific users. [Stavros
   Korokithakis]
 
