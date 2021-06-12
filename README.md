@@ -1,9 +1,6 @@
 django-tokenauth
 ================
 
-About
------
-
 Django-tokenauth is a simple, passwordless authentication method based on
 a one-time token sent over email. There is no user registration per se, only
 login. The user enters their email on the login page, and a one-time link that
