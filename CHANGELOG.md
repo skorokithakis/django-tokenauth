@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+%%version%% (unreleased)
+------------------------
+
+Fixes
+~~~~~
+- Fix naive/aware datetime issue. [Stavros Korokithakis]
+
+
 v0.5.0 (2021-06-12)
 -------------------
 
