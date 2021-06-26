@@ -7,6 +7,8 @@ from django.contrib.auth import login as djlogin
 from django.contrib.auth import logout as djlogout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.utils.timezone import is_aware
+from django.utils.timezone import make_aware
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
@@ -35,6 +37,14 @@ class EmailForm(forms.Form):
     """The email form for the login page."""
 
     email = forms.EmailField(label="Your email address")
+
+
+def awarify(dt):
+    """Make a datetime aware if it's not already."""
+    if is_aware(dt):
+        return dt
+    else:
+        return make_aware(dt)
 
 
 @require_http_methods(["POST"])
@@ -81,7 +91,9 @@ def email_post(request):
             )
             % {
                 "delay": ta_settings.RESENDING_DELAY
-                - (datetime.now() - previous_emails[0].timestamp).seconds
+                - (
+                    awarify(datetime.now()) - awarify(previous_emails[0].timestamp)
+                ).seconds
             },
         )
         return redirect(ta_settings.LOGIN_URL)
