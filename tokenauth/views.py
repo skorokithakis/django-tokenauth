@@ -125,9 +125,15 @@ def token_post(request, token):
 
     if hasattr(user, "_tokenauth_new_email"):
         user.email = user._tokenauth_new_email
-        user.save()
+        try:
+            user.save()
+        except Exception:
+            messages.error(
+                request, _("There was an error changing your email address.")
+            )
+        else:
+            messages.success(request, _("Your email address has been changed."))
 
-        messages.success(request, _("Your email address has been changed."))
         del user._tokenauth_new_email
         return redirect(ta_settings.LOGIN_REDIRECT)
 
