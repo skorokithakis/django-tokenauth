@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+%%version%% (unreleased)
+------------------------
+
+Fixes
+~~~~~
+- Don't crash on an email-change error. [Stavros Korokithakis]
+
+
 v0.5.1 (2021-06-26)
 -------------------
 
