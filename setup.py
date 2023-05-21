@@ -5,7 +5,7 @@ from tokenauth import __version__
 
 assert sys.version >= "2.7", "Requires Python v2.7 or above."
 from distutils.core import setup  # noqa
-from setuptools import find_packages  # noqa
+from setuptools import find_namespace_packages  # noqa
 
 setup(
     name="django-tokenauth",
@@ -20,5 +20,5 @@ setup(
     keywords="django",
     zip_safe=False,
     include_package_data=True,
-    packages=find_packages(),
+    packages=find_namespace_packages(),
 )

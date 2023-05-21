@@ -4,7 +4,6 @@ from django.db import models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("tokenauth", "0003_authtoken_new_email")]
 
     operations = [

@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+%%version%% (unreleased)
+------------------------
+
+Features
+~~~~~~~~
+- Include detail about ignoring this message. [Stavros Korokithakis]
+
+
 v0.5.2 (2021-11-13)
 -------------------
 
