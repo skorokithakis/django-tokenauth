@@ -11,5 +11,7 @@ https://{{ current_site.domain }}{% url "tokenauth:login-token" token.token %}
 Please note that the link will expire a few minutes after you requested it, and you
 might need to request a new one if this one doesn't work.
 
+If you didn't request a login link, you can safely ignore this email.
+
 Thanks!
 The {{ current_site.name|safe }} team
