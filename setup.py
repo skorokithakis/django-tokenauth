@@ -3,7 +3,7 @@ import sys
 
 from tokenauth import __version__
 
-assert sys.version >= "2.7", "Requires Python v2.7 or above."
+assert sys.version_info >= (3, 8), "Requires Python v3.8 or above."
 from distutils.core import setup  # noqa
 from setuptools import find_namespace_packages  # noqa
 
