@@ -21,4 +21,13 @@ setup(
     zip_safe=False,
     include_package_data=True,
     packages=find_namespace_packages(),
+    extras_require={
+        "test": [
+            "django",
+            "factory-boy==3.3.0",
+            "psycopg2-binary==2.9.9",
+            "pytest==7.4.3",
+            "pytest-django==4.5.2",
+        ],
+    },
 )
