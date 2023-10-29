@@ -8,6 +8,9 @@ is only valid for a few minutes (and one login) is generated and sent in an
 email. The user clicks on the link and is immediately logged in, and the token
 is invalidated.
 
+django-tokenauth requires Django 4.2 or newer. If you using an older version
+of Django, consider using v0.5.3 or earlier of this package.
+
 [![PyPI version](https://img.shields.io/pypi/v/django-tokenauth.svg)](https://pypi.python.org/pypi/django-tokenauth)
 
 
