@@ -24,6 +24,7 @@ setup(
     extras_require={
         "test": [
             "django",
+            "black==23.10.1",
             "factory-boy==3.3.0",
             "psycopg2-binary==2.9.9",
             "pytest==7.4.3",
