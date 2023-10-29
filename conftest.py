@@ -1,7 +1,6 @@
 import getpass
 import os
 
-import pytest
 from django.conf import settings
 
 
