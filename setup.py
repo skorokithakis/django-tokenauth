@@ -20,7 +20,7 @@ setup(
     keywords="django",
     zip_safe=False,
     include_package_data=True,
-    packages=find_namespace_packages(),
+    packages=find_namespace_packages(exclude=("tests",)),
     extras_require={
         "test": [
             "django",
