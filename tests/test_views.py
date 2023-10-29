@@ -1,9 +1,17 @@
+import datetime
 import pytest
 from django.core import mail
 from django.urls import reverse
+from django.utils.timezone import is_aware, now as django_now
 
+from tokenauth.views import awarify
 from tests.factories import UserFactory
 from tests.helpers import message_texts
+
+
+def test_awarify():
+    assert is_aware(awarify(datetime.datetime.now())) is True
+    assert is_aware(awarify(django_now())) is True
 
 
 @pytest.mark.django_db

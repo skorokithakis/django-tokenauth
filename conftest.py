@@ -18,6 +18,7 @@ def pytest_configure():
             }
         },
         TIME_ZONE="UTC",
+        USE_TZ=True,
         INSTALLED_APPS=[
             # Django apps
             "django.contrib.admin",
