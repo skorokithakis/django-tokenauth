@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from django.db import models
 from django.utils.timezone import now
+from django.utils.translation import gettext_lazy as _
 
 from . import settings as ta_settings
 
@@ -49,7 +50,9 @@ class AuthToken(models.Model):
     email = models.CharField(max_length=2000)
     new_email = models.CharField(
         max_length=2000,
-        help_text="The email address that the user's email will be set to when they use this token.",
+        help_text=_(
+            "The email address that the user's email will be set to when they use this token."
+        ),
         blank=True,
     )
     next_url = models.CharField(max_length=2000, blank=True)
