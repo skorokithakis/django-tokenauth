@@ -26,7 +26,7 @@ setup(
             "django",
             "black==23.10.1",
             "factory-boy==3.3.0",
-            "psycopg2-binary==2.9.9",
+            "psycopg2-binary==2.8.6",
             "pytest==7.4.3",
             "pytest-django==4.5.2",
         ],

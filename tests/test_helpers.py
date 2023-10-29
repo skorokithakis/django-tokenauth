@@ -37,7 +37,7 @@ def test_email_login_link(client):
 
     response = client.get(path)
     assert response.status_code == 302
-    assert response.headers["Location"] == "/wat/"
+    assert response["Location"] == "/wat/"
     assert message_texts(response) == ["Login successful."]
     # Make sure we've actually logged in.
     assert client.get("/authenticated/").content == b"authenticated"
@@ -73,7 +73,7 @@ def test_email_login_link_with_new_email(client):
 
     response = client.get(path)
     assert response.status_code == 302
-    assert response.headers["Location"] == "/accounts/profile/"
+    assert response["Location"] == "/accounts/profile/"
     assert message_texts(response) == ["Your email address has been changed."]
 
     # Has the email address changed?

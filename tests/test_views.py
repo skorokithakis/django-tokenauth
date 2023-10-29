@@ -52,7 +52,7 @@ def test_token_post_works(client, use_next_url):
         reverse("tokenauth:login-token", kwargs={"token": token.token})
     )
     assert response.status_code == 302
-    assert response.headers["Location"] == use_next_url or "/"
+    assert response["Location"] == use_next_url or "/"
     assert message_texts(response) == ["Login successful."]
     assert client.get("/authenticated/").content == b"authenticated"
 
