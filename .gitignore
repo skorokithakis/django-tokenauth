@@ -8,3 +8,4 @@ dist/
 *.egg
 *.egg-info
 local_settings.py
+.venv

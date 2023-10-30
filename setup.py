@@ -3,7 +3,7 @@ import sys
 
 from tokenauth import __version__
 
-assert sys.version >= "2.7", "Requires Python v2.7 or above."
+assert sys.version_info >= (3, 8), "Requires Python v3.8 or above."
 from distutils.core import setup  # noqa
 from setuptools import find_namespace_packages  # noqa
 
@@ -20,5 +20,16 @@ setup(
     keywords="django",
     zip_safe=False,
     include_package_data=True,
-    packages=find_namespace_packages(),
+    packages=find_namespace_packages(exclude=("tests",)),
+    extras_require={
+        "test": [
+            "django",
+            "black==23.10.1",
+            "factory-boy==3.3.0",
+            "pre-commit==3.5.0",
+            "psycopg2-binary==2.8.6",
+            "pytest==7.4.3",
+            "pytest-django==4.5.2",
+        ],
+    },
 )
