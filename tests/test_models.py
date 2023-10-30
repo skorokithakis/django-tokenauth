@@ -4,7 +4,9 @@ import pytest
 from django.utils.timezone import now
 
 from tests.factories import AuthTokenFactory
-from tokenauth.models import AuthToken, EmailLog, generate_token
+from tokenauth.models import AuthToken
+from tokenauth.models import EmailLog
+from tokenauth.models import generate_token
 
 
 def test_emaillog_str():

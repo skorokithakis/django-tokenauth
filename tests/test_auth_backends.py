@@ -2,8 +2,8 @@ import sys
 
 import pytest
 
-from tokenauth.auth_backends import EmailTokenBackend
 from tests.factories import UserFactory
+from tokenauth.auth_backends import EmailTokenBackend
 
 
 @pytest.mark.django_db

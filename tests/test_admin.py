@@ -1,8 +1,9 @@
 import pytest
 from django.urls import reverse
 
+from tests.factories import AuthTokenFactory
+from tests.factories import UserFactory
 from tokenauth.models import AuthToken
-from tests.factories import AuthTokenFactory, UserFactory
 
 
 @pytest.mark.django_db

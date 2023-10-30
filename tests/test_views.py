@@ -1,13 +1,16 @@
 import datetime
+
 import pytest
 from django.core import mail
 from django.urls import reverse
-from django.utils.timezone import is_aware, now as django_now
+from django.utils.timezone import is_aware
+from django.utils.timezone import now as django_now
 
+from tests.factories import AuthTokenFactory
+from tests.factories import UserFactory
+from tests.helpers import message_texts
 from tokenauth.models import AuthToken
 from tokenauth.views import awarify
-from tests.factories import AuthTokenFactory, UserFactory
-from tests.helpers import message_texts
 
 
 def test_awarify():
