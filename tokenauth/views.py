@@ -105,6 +105,7 @@ def email_post(request):
             request,
             _("There was an error sending the email. Please try again later."),
         )
+        return redirect(ta_settings.LOGIN_URL)
 
     messages.success(
         request,
