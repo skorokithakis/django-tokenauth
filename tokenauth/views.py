@@ -98,7 +98,13 @@ def email_post(request):
         )
         return redirect(ta_settings.LOGIN_URL)
 
-    email_login_link(request, email, next_url=request.GET.get("next", ""))
+    try:
+        email_login_link(request, email, next_url=request.GET.get("next", ""))
+    except Exception:
+        messages.error(
+            request,
+            _("There was an error sending the email. Please try again later."),
+        )
 
     messages.success(
         request,

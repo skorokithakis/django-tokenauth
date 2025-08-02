@@ -5,6 +5,71 @@ Changelog
 %%version%% (unreleased)
 ------------------------
 
+Fixes
+~~~~~
+- Support Django 4.2, and add a pile of tests (#5) [Lewis Collard]
+
+  * Only bother testing modern Django and Python versions.
+
+  Django 3.2 is out of support in a few months. Anyone adding this to a new
+  project will be using 4.2 if they have any sense. If they have no sense,
+  they can probably continue with the old version.
+
+  * Add initial skeleton for tests.
+
+  * Use `secrets.choice` rather than `random.choice` for generating tokens.
+
+  random.choice is not cryptographically secure. It might be impossible to
+  exploit with network timings. It is also not worth risking.
+
+  * Use modern `django.urls.path` for URLs.
+
+  * Use gettext_lazy, not the now-disappeared ugettext_lazy.
+
+  * Add some tests for views.
+
+  * Add tests for admin.
+
+  * Add tests for email_login_link.
+
+  * Add .venv to gitignore.
+
+  * Add test for AuthToken.delete_stale.
+
+  * Make help_text for TokenAuth.new_email translatable.
+
+  While I'm there, I wasn't sure if this was going to add a migration changing
+  from str to a lazy object, so add a test to ensure that no new migrations
+  are needed.
+
+  * Add Black formatting check to tests.
+
+  * Add tests for `awarify`.
+
+  * Add tests for EmailTokenBackend.get_user.
+
+  * Now that we have tests for the behaviour, simplify EmailTokenBackend.get_user.
+
+  .first() will return None if no such user exists, and we should very well
+  hope that we will never have two users with the same primary key, so
+  `.filter(pk=xx).first()` does the same thing as try/except.
+
+  * Add a bunch of tests for the login/logout views.
+
+  * Add required Django version to README.md.
+
+  * Restore testing of 3.x and 2.x.
+
+  * Exclude `tests` from `find_namespace_packages`.
+
+  * Remove an unused import.
+
+  * Run `pre-commit` instead of `black` directly.
+
+
+v0.5.3 (2023-05-21)
+-------------------
+
 Features
 ~~~~~~~~
 - Include detail about ignoring this message. [Stavros Korokithakis]
