@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+%%version%% (unreleased)
+------------------------
+
+Fixes
+~~~~~
+- Return early on error. [Stavros Korokithakis]
+
+
 v0.5.4 (2025-08-02)
 -------------------
 
